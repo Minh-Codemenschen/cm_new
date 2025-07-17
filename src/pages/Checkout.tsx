@@ -80,7 +80,7 @@ const Checkout = () => {
 
   const handleStripePay = async () => {
     try {
-      const res = await fetch('https://apt.codemenschen.at/api/plugins/create-stripe-session', {
+      const res = await fetch('https://cm-new-sandy.vercel.app/api/plugins/create-stripe-session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ pluginId: plugin.id, email: form.getValues('email') })
@@ -100,7 +100,7 @@ const Checkout = () => {
 
   const handlePayPalPay = async () => {
     try {
-      const res = await fetch('https://apt.codemenschen.at/api/plugins/create-paypal-order', {
+      const res = await fetch('https://cm-new-sandy.vercel.app/api/plugins/create-paypal-order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ pluginId: plugin.id })

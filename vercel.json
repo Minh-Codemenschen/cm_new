@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/plugins/create-stripe-session.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/create-stripe-session",
+      "dest": "api/plugins/create-stripe-session.js"
+    }
+  ]
+}

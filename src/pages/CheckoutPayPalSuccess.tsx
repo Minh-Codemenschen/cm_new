@@ -17,7 +17,7 @@ const CheckoutPayPalSuccess = () => {
       setLoading(false);
       return;
     }
-    fetch(`https://apt.codemenschen.at/api/plugins/verify-paypal-order?token=${token}`)
+    fetch(`https://cm-new-sandy.vercel.app/api/plugins/verify-paypal-order?token=${token}`)
       .then(res => {
         if (!res.ok) throw new Error("Serverfehler");
         return res.json();
