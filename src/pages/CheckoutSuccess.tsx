@@ -19,7 +19,7 @@ const CheckoutSuccess = () => {
       return;
     }
     // Gọi API backend xác nhận đơn hàng
-    fetch(`http://localhost:4000/api/plugins/verify-stripe-session?session_id=${sessionId}`)
+    fetch(`https://cm-new-sandy.vercel.app/api/plugins/verify-stripe-session?session_id=${sessionId}`)
       .then(res => res.json())
       .then(data => {
         if (data.success && data.pluginId) {
