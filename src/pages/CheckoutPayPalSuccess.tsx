@@ -18,7 +18,10 @@ const CheckoutPayPalSuccess = () => {
       return;
     }
     fetch(`https://cm-new-sandy.vercel.app/api/plugins/verify-paypal-order?token=${token}`)
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) throw new Error("Serverfehler");
+        return res.json();
+      })
       .then(data => {
         if (data.success && data.pluginId) {
           localStorage.setItem(`purchased_${data.pluginId}`, "true");
@@ -27,9 +30,10 @@ const CheckoutPayPalSuccess = () => {
           setError(data.error || "Unbekannter Fehler.");
         }
       })
-      .catch(() => setError("Verbindung zum Server fehlgeschlagen."))
+      .catch((err) => setError(err.message || "Verbindung zum Server fehlgeschlagen."))
       .finally(() => setLoading(false));
-  }, [location]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.search]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary/10 to-secondary/10">
@@ -55,4 +59,4 @@ const CheckoutPayPalSuccess = () => {
   );
 };
 
-export default CheckoutPayPalSuccess; 
+export default CheckoutPayPalSuccess;
