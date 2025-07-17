@@ -18,7 +18,7 @@ const Register = () => {
     setError('');
     setLoading(true);
     try {
-      const res = await fetch('https://cm-new-sandy.vercel.app/api/auth/register', {
+      const res = await fetch('https://apt.codemenschen.at/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
@@ -30,7 +30,7 @@ const Register = () => {
         return;
       }
       // Registrierung erfolgreich, automatisch anmelden
-      const loginRes = await fetch('https://cm-new-sandy.vercel.app/api/auth/login', {
+      const loginRes = await fetch('https://apt.codemenschen.at/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: form.email, password: form.password }),
