@@ -15,13 +15,16 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 4000;
 
+// Middleware
 app.use(cors());
 app.use(bodyParser.json());
+
+// Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/plugins', pluginsRoutes);
 
-// PostgreSQL connection pool (Supabase)
+// PostgreSQL (Supabase) connection
 export const db = new Pool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -31,21 +34,23 @@ export const db = new Pool({
   ssl: { rejectUnauthorized: false }, // Supabase yêu cầu SSL
 });
 
+// Health check
 app.get('/health', (req, res) => {
   res.json({ status: 'ok' });
 });
 
-app.listen(port, () => {
-  console.log(`Backend listening on port ${port}`);
-});
-
-// Xử lý __dirname cho ES Module
+// __dirname setup for ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Phục vụ file tĩnh React build
+// Serve static files (React build output)
 app.use(express.static(path.join(__dirname, '../../dist')));
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../../dist/index.html'));
+});
+
+// Start server (local or for platforms that support long-running servers)
+app.listen(port, () => {
+  console.log(`Backend listening on port ${port}`);
 });
