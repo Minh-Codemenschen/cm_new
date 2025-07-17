@@ -80,12 +80,13 @@ const Checkout = () => {
 
   const handleStripePay = async () => {
     try {
-      const res = await fetch('http://localhost:3001/api/plugins/create-stripe-session', {
+      const res = await fetch('http://localhost:4000/api/plugins/create-stripe-session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ pluginId: plugin.id, email: form.getValues('email') })
       });
       const data = await res.json();
+      console.log('Stripe session response:', data);
       if (data.url) {
         window.location.href = data.url;
       } else {
@@ -98,7 +99,7 @@ const Checkout = () => {
 
   const handlePayPalPay = async () => {
     try {
-      const res = await fetch('http://localhost:3001/api/plugins/create-paypal-order', {
+      const res = await fetch('http://localhost:4000/api/plugins/create-paypal-order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ pluginId: plugin.id })

@@ -17,7 +17,7 @@ const CheckoutPayPalSuccess = () => {
       setLoading(false);
       return;
     }
-    fetch(`http://localhost:3001/api/plugins/verify-paypal-order?token=${token}`)
+    fetch(`http://localhost:4000/api/plugins/verify-paypal-order?token=${token}`)
       .then(res => res.json())
       .then(data => {
         if (data.success && data.pluginId) {
