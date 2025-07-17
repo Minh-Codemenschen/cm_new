@@ -87,6 +87,7 @@ const Checkout = () => {
       });
       const data = await res.json();
       console.log('Stripe session response:', data);
+      console.log('Stripe session response:', data.url);
       if (data.url) {
         window.location.href = data.url;
       } else {
